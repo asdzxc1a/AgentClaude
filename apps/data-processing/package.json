@@ -1,0 +1,39 @@
+{
+  "name": "data-processing-agent",
+  "version": "1.0.0",
+  "description": "Data Processing Agent for Multi-Agent Observability System",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "test": "bun test",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "db:init": "bun run src/init-db.ts",
+    "db:reset": "rm -f events.db && bun run db:init",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bun": "^1.0.0",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "prettier": "^3.0.0"
+  },
+  "keywords": [
+    "observability",
+    "claude-code",
+    "multi-agent",
+    "data-processing",
+    "sqlite",
+    "typescript"
+  ],
+  "author": "Multi-Agent Observability System",
+  "license": "MIT"
+}

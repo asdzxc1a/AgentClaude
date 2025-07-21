@@ -1,0 +1,18 @@
+# Event Capture Agent Dependencies
+
+# Core dependencies
+requests>=2.28.0
+urllib3>=1.26.0
+
+# Optional dependencies for enhanced functionality
+openai>=1.0.0  # For AI summary generation (if using OpenAI)
+anthropic>=0.3.0  # For Claude-based summaries
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Performance and monitoring
+psutil>=5.9.0  # For system metrics

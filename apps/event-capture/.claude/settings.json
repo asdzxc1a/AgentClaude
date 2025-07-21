@@ -1,0 +1,143 @@
+{
+  "version": "1.0",
+  "description": "Multi-Agent Observability System Hook Configuration",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "command": "python",
+        "args": ["hooks/pre_tool_use.py"],
+        "description": "Validate and filter tool usage before execution",
+        "timeout": 10,
+        "critical": true
+      },
+      {
+        "command": "python", 
+        "args": ["send_event.py", "--event-type", "PreToolUse", "--summarize"],
+        "description": "Send pre-tool-use event with AI summary",
+        "timeout": 15,
+        "critical": false
+      }
+    ],
+    
+    "PostToolUse": [
+      {
+        "command": "python",
+        "args": ["hooks/post_tool_use.py"],
+        "description": "Capture tool execution results and analysis",
+        "timeout": 10,
+        "critical": false
+      },
+      {
+        "command": "python",
+        "args": ["send_event.py", "--event-type", "PostToolUse"],
+        "description": "Send post-tool-use event",
+        "timeout": 15,
+        "critical": false
+      }
+    ],
+    
+    "UserPromptSubmit": [
+      {
+        "command": "python",
+        "args": ["hooks/user_prompt_submit.py"],
+        "description": "Capture and analyze user prompt submissions",
+        "timeout": 10,
+        "critical": false
+      },
+      {
+        "command": "python",
+        "args": ["send_event.py", "--event-type", "UserPromptSubmit", "--add-chat", "conversation.jsonl"],
+        "description": "Send user prompt event with chat history",
+        "timeout": 20,
+        "critical": false
+      }
+    ],
+    
+    "Notification": [
+      {
+        "command": "python",
+        "args": ["hooks/notification.py"],
+        "description": "Capture notification and user interaction events",
+        "timeout": 5,
+        "critical": false
+      },
+      {
+        "command": "python",
+        "args": ["send_event.py", "--event-type", "Notification"],
+        "description": "Send notification event",
+        "timeout": 10,
+        "critical": false
+      }
+    ],
+    
+    "Stop": [
+      {
+        "command": "python",
+        "args": ["hooks/stop.py"],
+        "description": "Capture session completion event",
+        "timeout": 10,
+        "critical": false
+      },
+      {
+        "command": "python",
+        "args": ["send_event.py", "--event-type", "Stop", "--add-chat", "final_conversation.jsonl", "--summarize"],
+        "description": "Send session stop event with final chat log and summary",
+        "timeout": 30,
+        "critical": false
+      }
+    ],
+    
+    "SubagentStop": [
+      {
+        "command": "python",
+        "args": ["hooks/subagent_stop.py"],
+        "description": "Capture subagent completion event",
+        "timeout": 5,
+        "critical": false
+      },
+      {
+        "command": "python",
+        "args": ["send_event.py", "--event-type", "SubagentStop"],
+        "description": "Send subagent stop event",
+        "timeout": 10,
+        "critical": false
+      }
+    ]
+  },
+  
+  "environment": {
+    "OBSERVABILITY_SERVER_URL": "http://localhost:4000",
+    "SOURCE_APP": "claude-agent-observability",
+    "CLAUDE_SESSION_ID": "${CLAUDE_SESSION_ID:-auto-generated}",
+    "PYTHON_PATH": "${PYTHON_PATH}:./hooks:.",
+    "LOG_LEVEL": "INFO"
+  },
+  
+  "error_handling": {
+    "continue_on_hook_failure": true,
+    "max_retries": 3,
+    "retry_delay_seconds": 1,
+    "timeout_behavior": "continue"
+  },
+  
+  "security": {
+    "validate_hook_scripts": true,
+    "restrict_network_access": false,
+    "allowed_hosts": ["localhost", "127.0.0.1"],
+    "sanitize_outputs": true
+  },
+  
+  "performance": {
+    "parallel_hooks": false,
+    "cache_hook_results": false,
+    "max_event_payload_size": 1048576,
+    "compress_large_payloads": true
+  },
+  
+  "observability": {
+    "capture_hook_performance": true,
+    "log_hook_execution": true,
+    "include_system_metrics": true,
+    "privacy_mode": false
+  }
+}
