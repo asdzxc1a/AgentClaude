@@ -15,6 +15,14 @@ import Badge from 'primevue/badge'
 import Chip from 'primevue/chip'
 import Panel from 'primevue/panel'
 import ProgressBar from 'primevue/progressbar'
+import Slider from 'primevue/slider'
+import InputText from 'primevue/inputtext'
+import InputNumber from 'primevue/inputnumber'
+import Dropdown from 'primevue/dropdown'
+import Calendar from 'primevue/calendar'
+import Checkbox from 'primevue/checkbox'
+import Dialog from 'primevue/dialog'
+import Divider from 'primevue/divider'
 import Toast from 'primevue/toast'
 import ToastService from 'primevue/toastservice'
 import ConfirmationService from 'primevue/confirmationservice'
@@ -62,6 +70,14 @@ app.component('Badge', Badge)
 app.component('Chip', Chip)
 app.component('Panel', Panel)
 app.component('ProgressBar', ProgressBar)
+app.component('Slider', Slider)
+app.component('InputText', InputText)
+app.component('InputNumber', InputNumber)
+app.component('Dropdown', Dropdown)
+app.component('Calendar', Calendar)
+app.component('Checkbox', Checkbox)
+app.component('Dialog', Dialog)
+app.component('Divider', Divider)
 app.component('Toast', Toast)
 
 // Global directives
