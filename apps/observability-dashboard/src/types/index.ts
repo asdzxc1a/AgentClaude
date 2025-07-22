@@ -73,6 +73,7 @@ export interface AgentInfo {
   session_count: number
   event_count: number
   avg_response_time: number
+  health_score?: number
 }
 
 // Chart data types

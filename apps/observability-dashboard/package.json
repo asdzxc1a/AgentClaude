@@ -44,17 +44,5 @@
     "@vue/eslint-config-prettier": "^10.1.0",
     "prettier": "^3.4.2",
     "sass": "^1.81.1"
-  },
-  "claude_agent": {
-    "agent_id": "observability-ui-agent",
-    "project_type": "frontend_dashboard",
-    "tech_stack": ["vue3", "typescript", "pinia", "websockets", "chartjs"],
-    "primary_tasks": [
-      "real_time_monitoring",
-      "event_visualization",
-      "agent_coordination_display",
-      "performance_analytics",
-      "responsive_design"
-    ]
   }
 }
