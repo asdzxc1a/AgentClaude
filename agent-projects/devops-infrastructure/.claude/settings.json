@@ -1,0 +1,78 @@
+{
+  "hooks": {
+    "pre_tool_use": [
+      {
+        "script": "../../apps/event-capture/hooks/pre_tool_use.py",
+        "timeout": 15000
+      }
+    ],
+    "post_tool_use": [
+      {
+        "script": "../../apps/event-capture/hooks/post_tool_use.py",
+        "timeout": 20000
+      }
+    ],
+    "user_prompt_submit": [
+      {
+        "script": "../../apps/event-capture/hooks/user_prompt_submit.py",
+        "timeout": 5000
+      }
+    ],
+    "notification": [
+      {
+        "script": "../../apps/event-capture/hooks/notification.py", 
+        "timeout": 3000
+      }
+    ],
+    "stop": [
+      {
+        "script": "../../apps/event-capture/hooks/stop.py",
+        "timeout": 5000
+      }
+    ],
+    "subagent_stop": [
+      {
+        "script": "../../apps/event-capture/hooks/subagent_stop.py",
+        "timeout": 5000
+      }
+    ]
+  },
+  "environment": {
+    "OBSERVABILITY_SERVER_URL": "http://localhost:4000",
+    "SOURCE_APP": "devops-agent",
+    "CLAUDE_SESSION_ID": "devops-session-${RANDOM}",
+    "LOG_LEVEL": "INFO",
+    "KUBE_CONFIG_PATH": "~/.kube/config"
+  },
+  "agent_metadata": {
+    "agent_id": "devops-agent",
+    "project_type": "infrastructure",
+    "tech_stack": ["docker", "kubernetes", "terraform", "ansible", "prometheus"],
+    "primary_tasks": [
+      "infrastructure_provisioning",
+      "container_orchestration", 
+      "ci_cd_pipeline",
+      "monitoring_setup",
+      "security_scanning",
+      "backup_automation"
+    ],
+    "cloud_providers": [
+      "aws",
+      "azure", 
+      "gcp"
+    ],
+    "deployment_targets": [
+      "staging",
+      "production",
+      "development"
+    ],
+    "observability_events": [
+      "terraform_operations",
+      "kubernetes_deployments",
+      "docker_builds",
+      "ansible_playbooks", 
+      "security_scans",
+      "monitoring_alerts"
+    ]
+  }
+}

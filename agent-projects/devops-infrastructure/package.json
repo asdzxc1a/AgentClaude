@@ -1,0 +1,84 @@
+{
+  "name": "devops-infrastructure",
+  "version": "1.0.0",
+  "description": "Cloud infrastructure automation and deployment pipeline - Claude Agent Demo",
+  "main": "scripts/deploy.js",
+  "scripts": {
+    "infrastructure:plan": "terraform plan -out=tfplan",
+    "infrastructure:apply": "terraform apply tfplan",
+    "infrastructure:destroy": "terraform destroy -auto-approve",
+    "docker:build": "docker build -t devops-demo .",
+    "docker:push": "docker push devops-demo:latest",
+    "k8s:deploy": "kubectl apply -f k8s/",
+    "k8s:status": "kubectl get pods,services,deployments",
+    "helm:install": "helm install devops-demo charts/devops-demo",
+    "helm:upgrade": "helm upgrade devops-demo charts/devops-demo",
+    "ansible:provision": "ansible-playbook -i inventory playbooks/provision.yml",
+    "ansible:deploy": "ansible-playbook -i inventory playbooks/deploy.yml",
+    "monitoring:deploy": "kubectl apply -f monitoring/",
+    "monitoring:dashboard": "kubectl port-forward svc/grafana 3000:80",
+    "ci:validate": "npm run lint && npm run test && npm run security:scan",
+    "lint": "eslint scripts/ --fix",
+    "test": "jest",
+    "test:integration": "jest --testPathPattern=integration",
+    "security:scan": "npm audit && docker scan devops-demo:latest",
+    "logs:aggregation": "kubectl logs -f deployment/log-aggregator",
+    "backup:create": "scripts/backup.sh create",
+    "backup:restore": "scripts/backup.sh restore"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^0.20.0",
+    "aws-sdk": "^2.1491.0",
+    "azure-arm-resource": "^10.2.0",
+    "google-cloud": "^0.5.0",
+    "dockerode": "^4.0.0",
+    "terraform-parser": "^1.0.0",
+    "yaml": "^2.3.4",
+    "shelljs": "^0.8.5",
+    "winston": "^3.11.0",
+    "prometheus-client": "^15.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "supertest": "^6.3.3"
+  },
+  "claude_agent": {
+    "agent_id": "devops-agent",
+    "project_type": "infrastructure",
+    "tech_stack": ["docker", "kubernetes", "terraform", "ansible", "prometheus"],
+    "primary_tasks": [
+      "infrastructure_provisioning",
+      "container_orchestration",
+      "ci_cd_pipeline",
+      "monitoring_setup",
+      "security_scanning",
+      "backup_automation"
+    ],
+    "cloud_providers": ["aws", "azure", "gcp"],
+    "deployment_targets": ["staging", "production", "development"]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claude-agents/devops-infrastructure.git"
+  },
+  "keywords": [
+    "devops",
+    "infrastructure",
+    "kubernetes",
+    "docker",
+    "terraform",
+    "ci-cd",
+    "monitoring"
+  ],
+  "author": "Claude DevOps Agent",
+  "license": "MIT"
+}

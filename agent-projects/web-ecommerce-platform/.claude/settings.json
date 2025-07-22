@@ -1,0 +1,65 @@
+{
+  "hooks": {
+    "pre_tool_use": [
+      {
+        "script": "../../apps/event-capture/hooks/pre_tool_use.py",
+        "timeout": 5000
+      }
+    ],
+    "post_tool_use": [
+      {
+        "script": "../../apps/event-capture/hooks/post_tool_use.py", 
+        "timeout": 5000
+      }
+    ],
+    "user_prompt_submit": [
+      {
+        "script": "../../apps/event-capture/hooks/user_prompt_submit.py",
+        "timeout": 3000
+      }
+    ],
+    "notification": [
+      {
+        "script": "../../apps/event-capture/hooks/notification.py",
+        "timeout": 3000
+      }
+    ],
+    "stop": [
+      {
+        "script": "../../apps/event-capture/hooks/stop.py",
+        "timeout": 3000
+      }
+    ],
+    "subagent_stop": [
+      {
+        "script": "../../apps/event-capture/hooks/subagent_stop.py",
+        "timeout": 3000
+      }
+    ]
+  },
+  "environment": {
+    "OBSERVABILITY_SERVER_URL": "http://localhost:4000",
+    "SOURCE_APP": "web-dev-agent", 
+    "CLAUDE_SESSION_ID": "web-session-${RANDOM}",
+    "LOG_LEVEL": "INFO"
+  },
+  "agent_metadata": {
+    "agent_id": "web-dev-agent",
+    "project_type": "web_application",
+    "tech_stack": ["react", "node.js", "postgresql", "docker"],
+    "primary_tasks": [
+      "component_development",
+      "api_endpoint_creation",
+      "database_operations", 
+      "testing_implementation",
+      "ui_ux_development"
+    ],
+    "observability_events": [
+      "npm_commands",
+      "git_operations", 
+      "database_queries",
+      "component_creation",
+      "api_testing"
+    ]
+  }
+}
